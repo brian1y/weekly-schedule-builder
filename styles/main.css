@@ -1,0 +1,184 @@
+/* table */
+.table {
+  table-layout: fixed;
+  position: relative;
+}
+
+.table th {
+  text-align: center !important;
+}
+
+.table td {
+  height: 80px;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+.eventBox {
+  position: absolute;
+  color: white;
+  background-color: hsl(218, 74%, 56%);
+  border-radius: 10px;
+  text-align: center;
+  overflow: auto;
+}
+
+.eventBox:hover {
+  background-color: hsl(218, 74%, 50%);
+  cursor: pointer;
+}
+
+.eventBox-selected {
+  background-color: hsl(0, 96%, 58%) !important;
+
+}
+
+.eventBox-afterimage {
+  opacity: 0.3;
+}
+
+.eventBox-dragging {
+  box-shadow: 0px 3px 5px hsla(0, 0%, 35%, 0.8);
+}
+
+
+/* form */
+.button-row {
+  display: flex;
+  gap: 5px;
+}
+
+.toggle-btn {
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border: 2px solid hsl(218, 74%, 50%);
+  margin-bottom: 2px;
+  background: white;
+  color: hsl(218, 74%, 50%);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.toggle-btn.btn-selected {
+  background: hsl(218, 74%, 50%);
+  color: white;
+}
+
+.popup {
+  background-color: white;
+  border-radius: 10px;
+  border: 0.5px solid hsl(0, 0%, 90%);
+  box-shadow: 0px 1px 5px hsla(0, 0%, 63%, 0.5);
+  padding: 30px;
+  box-sizing: border-box;
+  width: 50%;
+  margin: 0 auto;
+
+  align-items: center;
+  justify-content: left;
+}
+
+.title {
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+/* list */
+
+ul.scheduleList {
+  list-style-type: none;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 5px;
+  height: 500px;
+
+}
+
+ul.scheduleList > li.item, ul.scheduleList > li.templateItem {
+  padding: 8px;
+  border-bottom: 1px solid hsla(0, 0%, 63%, 0.5);
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+}
+
+ul.scheduleList > li.item:hover, ul.scheduleList > li.templateItem:hover {
+  background-color: hsla(0, 0%, 80%, 0.5);
+}
+
+ul.scheduleList > li.subheadings {
+  padding: 6px 3px;
+  border-bottom: 1px solid hsla(0, 0%, 63%, 0.5);
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.round-button {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-button:hover {
+  background-color: hsla(0, 0%, 70%, 0.5);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+
+/* sticy components */
+@media screen and (width >= 992px) {
+  nav {
+    position: sticky;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    height: 70px;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+  }
+
+  .table thead {
+    position: sticky;
+    top: 70px;
+    background-color: white;
+    z-index: 2;
+  }
+}
+
+@media screen and (width < 992px) {
+  nav {
+    position: sticky;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    height: 150px;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+  }
+
+  .table thead {
+    position: sticky;
+    top: 150px;
+    background-color: white;
+    z-index: 2;
+  }
+}

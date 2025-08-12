@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Schedule Planner</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+
+    <!--stylesheet-->
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!--main script-->
+    <script src="scripts/main.js" defer></script>
+</head>
+
+<body>
+    <div id="main" class="container-fluid">
+
+        <nav class="row">
+            <h1 class="col-md-6">Weekly Schedule Planner</h1>
+            <div class="col-md-6">
+                <br>
+                <!--Create event btn-->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventCreate">
+                    Create Event
+                </button>
+                <!--Delete event btn-->
+                <button type="button" class="btn btn-danger" id="delete-eventbox-btn">
+                    Delete Event
+                </button>
+                <!--Edit event btn-->
+                <button type="button" class="btn btn-success" id="edit-eventbox-btn" data-toggle="modal"
+                    data-target="#eventEdit">
+                    Edit Event
+                </button>
+                <!--View schedulese btn-->
+                <button type="button" class="btn btn-primary" id="view-schedule-btn" data-toggle="modal"
+                    data-target="#viewSchedules">
+                    View Schedules
+                </button>
+                <!--Save schedule btn-->
+                <button type="button" class="btn btn-primary" id="save-schedule-btn" data-toggle="modal"
+                    data-target="#saveSchedule">
+                    Save Schedule
+                </button>
+            </div>
+        </nav>
+
+        <table id="scheduleTable" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Hour</th>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="scheduleTableBody">
+
+            </tbody>
+        </table>
+
+        <!--Create Event Modal-->
+        <div class="modal fade" id="eventCreate" tabindex="-1">
+            <form id="scheduleForm" class="popup">
+                <div class="title">Create an Event</div>
+                <!-- Task Name -->
+                <div class="form-group">
+                    <label for="taskName" class="form-label">Task Name</label>
+                    <input type="text" class="form-control" id="taskName" placeholder="Enter task name" required>
+                </div>
+
+                <!-- Day of the Week -->
+                <div class="form-group">
+                    <label for="day" class="form-label">Day of the Week</label>
+                    <div id="buttonGroup" class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="toggle-btn" value="All">All</button>
+                            <button type="button" class="toggle-btn" value="Sunday">Sun</button>
+                            <button type="button" class="toggle-btn" value="Monday">Mon</button>
+                            <button type="button" class="toggle-btn" value="Tuesday">Tue</button>
+                            <button type="button" class="toggle-btn" value="Wednesday">Wed</button>
+                            <button type="button" class="toggle-btn" value="Thursday">Thu</button>
+                            <button type="button" class="toggle-btn" value="Friday">Fri</button>
+                            <button type="button" class="toggle-btn" value="Saturday">Sat</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Range -->
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="startTime" class="form-label">Start Time</label>
+                        <select class="form-control" id="startTime" required></select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="endTime" class="form-label">End Time</label>
+                        <select class="form-control" id="endTime" required></select>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" rows="3"
+                        placeholder="Optional description"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary">Add to Schedule</button>
+                <!--Cancel-->
+                <button id="closeForm" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </form>
+            <br>
+        </div>
+
+        <!--Edit event modal-->
+        <div class="modal fade" id="eventEdit" tabindex="-1">
+            <form id="editForm" class="popup">
+                <div class="title">Edit Event(s)</div>
+                <!--taskname-->
+                <div class="form-group">
+                    <label for="editTaskname" class="form-label">Task Name</label>
+                    <input type="text" class="form-control" id="editTaskName" placeholder="Enter task name" required>
+                </div>
+                <!--description-->
+                <div class="form-group">
+                    <label for="editDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="editDescription" rows="3"
+                        placeholder="Optional description"></textarea>
+                </div>
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary">Confirm Edit</button>
+                <!--Cancel-->
+                <button id="closeForm" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+
+            </form>
+        </div>
+
+        <!--View schedules modal-->
+        <div class="modal fade" id="viewSchedules" tabindex="-1">
+            <div class="popup">
+                <div class="title">View Schedules</div>
+                <ul class="scheduleList">
+                    <li class="subheadings">
+                        <div>Name</div>
+                        <div>Actions</div>
+                    </li>
+                </ul>
+                <!--Close btn-->
+                <button id="closeForm" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+        <!--Save schedule modal-->
+        <div class="modal fade" id="saveSchedule" tabindex="-1">
+            <form id="saveScheduleForm" class="popup">
+                <div class="title">Save Schedule</div>
+                <!--schedule name-->
+                <div class="form-group">
+                    <label for="scheduleName" class="form-label">Schedule Name</label>
+                    <input type="text" class="form-control" id="scheduleName" placeholder="Enter schedule name"
+                        required>
+                </div>
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary">Save</button>
+                <!--Cancel-->
+                <button id="closeForm" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+</body>
